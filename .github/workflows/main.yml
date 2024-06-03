@@ -1,0 +1,56 @@
+name: Liteium CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11.3'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest
+        pip install selenium
+
+    - name: Fetch latest ChromeDriver version
+      id: get_version
+      run: |
+        LATEST_VERSION=$(curl -sS https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json | jq -r '.channels.Stable.version')
+        echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
+
+    - name: Download ChromeDriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget unzip
+        wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${{ env.LATEST_VERSION }}/linux64/chromedriver-linux64.zip
+        unzip chromedriver-linux64.zip
+        sudo mv -f chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+        sudo chmod +x /usr/local/bin/chromedriver
+      env:
+        LATEST_VERSION: ${{ steps.get_version.outputs.LATEST_VERSION }}
+
+    - name: Run tests
+      env:
+        PATH: /usr/local/bin:$PATH
+      run: |
+        pytest
+
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 .
