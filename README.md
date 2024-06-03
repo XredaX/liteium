@@ -1,45 +1,90 @@
-<h1>liteium</h1>
-<p>liteium is a lightweight Python library inspired by Selenium, designed to simplify web scraping and automation tasks, especially for beginners.</p>
+# liteium: A Lightweight Web Scraping and Automation Library
 
-<p>liteium allows you to quickly automate interactions with web pages using a low number of lines of code.</p>
+**liteium** is a user-friendly Python library inspired by Selenium, designed to simplify web scraping and automation tasks, especially for beginners. 
 
-<h2>Features ✨</h2>
-<ul>
-  <li>Easy setup and installation ⚙️</li>
-  <li>Beginner-friendly syntax 📝</li>
-  <li>Lightweight and minimalistic 🌟</li>
-</ul>
+It offers a streamlined interface with intuitive methods, making it easier to interact with web pages and extract data without the need for extensive Selenium knowledge.
 
-<h2>Installation 💻</h2>
-<p>You can install liteium via pip:</p>
-<pre><code>pip install liteium</code></pre>
+## Features ✨
 
-<h2>Usage 🚀</h2>
+* **Simplified Syntax:**  Focus on clarity and ease of use, allowing you to write concise and readable code. 
+* **Lightweight:**  Minimal dependencies, making it a lightweight solution without sacrificing functionality.
+* **Common Web Interactions:**  Includes methods for finding elements, interacting with forms, taking screenshots, managing cookies, and more.
+* **Exception Handling:**  Provides helpful error messages to guide you through potential issues.
 
-<pre><code>from liteium import *</code></pre>
+## Installation 🚀
 
-<p>Initialize the WebDriver:</p>
-<pre><code>driver_path = '/path/to/chromedriver'
-driver(driver_path)</code></pre>
+Install liteium using pip:
 
-<p>Open a URL:</p>
-<pre><code>open('https://example.com')</code></pre>
+```bash
+pip install liteium
+```
 
-<p>Find an element by ID:</p>
-<pre><code>element = id('exampleId')
+## Quick Start 🚗
+
+Here's a basic example of using liteium:
+
+```python
+from liteium import *
+
+# Initialize the WebDriver (replace with your chromedriver path)
+driver_path = '/path/to/chromedriver'
+init_driver(driver_path)
+
+# Open a URL
+open_url('https://www.example.com')
+
+# Find an element by ID
+element = id('exampleId')
 print(element.text)
-</code></pre>
 
-<p>Take a screenshot:</p>
-<pre><code>screenshot('example.png')</code></pre>
+# Take a screenshot
+screenshot('example.png')
 
-<p>Close the WebDriver:</p>
-<pre><code>close()</code></pre>
+# Close the WebDriver
+close() 
+```
 
-<h2>Documentation 📚</h2>
-<p>For more detailed documentation, please visit our <a href="https://liteium-doc.vercel.app/" target="_blank" rel="noopener noreferrer">Documentation Page</a>.</p>
+## Key Methods 🗝️
 
-<p>If you need any assistance with the code, feel free to contact me via email: <strong>📧 redaelbettioui@gmail.com</strong></p>
-<p>Or through LinkedIn: <strong><a href="https://www.linkedin.com/in/reda-el-bettioui/">Reda El Bettioui</a></strong></p>
+* **`init_driver(driver_path, browser='chrome')`**: Initialize the WebDriver (Chrome or Firefox).
+* **`open_url(url)`**: Open a specified URL in the browser.
+* **`find_element(by, value, time=10)`**:  Find a single element by various locators (ID, name, XPath, etc.).
+* **`find_elements(by, value, time=10)`**: Find multiple elements using the same locator approach.
+* **`screenshot(filename=None)`**: Capture a screenshot of the current page.
+* **`save_cookies(filename=None)`**: Save the browser's cookies to a file.
+* **`delete_cookies()`**: Delete all cookies in the browser.
+* **`set_cookies(filename)`**: Load cookies from a file and set them in the browser.
+* **`switch_to_alert(action='accept')`**: Interact with browser alerts (accept, cancel, get text).
+* **`switch_to_default()`**: Switch back to the main document from a frame or window.
+* **`switch_to_frame(frame)`**: Switch to a specific frame within the current page.
+* **`switch_to_window(index_or_name)`**: Switch to a particular window (by index or name).
+* **`new_window(url='about:blank')`**: Open a new browser window.
+* **`js(script)`**: Execute JavaScript code in the browser.
+* **`refresh()`**: Refresh the current page.
+* **`forward()`**: Navigate forward in the browser's history.
+* **`back()`**: Navigate backward in the browser's history.
+* **`get_current_url()`**: Get the current URL of the browser.
+* **`get_title()`**: Get the title of the current page.
 
-<p>If you appreciate the work, please consider giving it a star ⭐</p>
+##  Documentation 📚
+
+For a detailed explanation of all available methods and usage examples, please visit the [liteium documentation](https://liteium-doc.vercel.app/).
+
+## Contributing 🤝
+
+Contributions are always welcome! If you have any ideas, feature requests, or bug fixes, please open an issue or submit a pull request on GitHub: [https://github.com/XredaX/liteium](https://github.com/XredaX/liteium).
+
+## Support 📧
+
+If you have any questions or need assistance, feel free to contact me:
+
+* Email: redaelbettioui@gmail.com
+* LinkedIn: [https://www.linkedin.com/in/reda-el-bettioui/](https://www.linkedin.com/in/reda-el-bettioui/)
+
+## License 📝
+
+liteium is released under the MIT License. See the LICENSE file for details.
+
+## Star the Repository ⭐
+
+If you find this library helpful, please consider giving it a star on GitHub ⭐ to show your support!
