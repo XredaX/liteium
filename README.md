@@ -1,5 +1,4 @@
 ![liteium banner](assets/images/banner.png)
-``` &#8203;:citation[【oaicite:0】]&#8203;
 
 # liteium: A Lightweight Web Scraping and Automation Library
 
