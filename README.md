@@ -37,7 +37,7 @@ print(element.text)
 <pre><code>close()</code></pre>
 
 <h2>Documentation 📚</h2>
-<p>For more detailed documentation, please visit our <a href="https://liteium-doc.vercel.app/">Documentation Page</a>.</p>
+<p>For more detailed documentation, please visit our <a href="https://liteium-doc.vercel.app/" target="_blank" rel="noopener noreferrer">Documentation Page</a>.</p>
 
 <p>If you need any assistance with the code, feel free to contact me via email: <strong>📧 redaelbettioui@gmail.com</strong></p>
 <p>Or through LinkedIn: <strong><a href="https://www.linkedin.com/in/reda-el-bettioui/">Reda El Bettioui</a></strong></p>
