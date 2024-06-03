@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11.3'
 
@@ -31,15 +31,13 @@ jobs:
       id: get_version
       run: |
         LATEST_VERSION=$(curl -sS https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json | jq -r '.channels.Stable.version')
-        echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
+        echo "::set-output name=LATEST_VERSION::$LATEST_VERSION"
 
     - name: Download ChromeDriver
-      env:
-        LATEST_VERSION: ${{ steps.get_version.outputs.LATEST_VERSION }}
       run: |
         sudo apt-get update
-        sudo apt-get install -y wget unzip
-        wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${{ env.LATEST_VERSION }}/linux64/chromedriver-linux64.zip
+        sudo apt-get install -y wget unzip jq
+        wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${{ steps.get_version.outputs.LATEST_VERSION }}/linux64/chromedriver-linux64.zip
         unzip chromedriver-linux64.zip
         sudo mv -f chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
         sudo chmod +x /usr/local/bin/chromedriver
