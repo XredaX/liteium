@@ -23,6 +23,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install pytest
         pip install selenium
 
@@ -33,6 +34,8 @@ jobs:
         echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
 
     - name: Download ChromeDriver
+      env:
+        LATEST_VERSION: ${{ steps.get_version.outputs.LATEST_VERSION }}
       run: |
         sudo apt-get update
         sudo apt-get install -y wget unzip
@@ -40,8 +43,6 @@ jobs:
         unzip chromedriver-linux64.zip
         sudo mv -f chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
         sudo chmod +x /usr/local/bin/chromedriver
-      env:
-        LATEST_VERSION: ${{ steps.get_version.outputs.LATEST_VERSION }}
 
     - name: Run tests
       env:
