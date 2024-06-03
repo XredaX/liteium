@@ -1,3 +1,6 @@
+![liteium banner](assets/images/banner.png)
+``` &#8203;:citation[【oaicite:0】]&#8203;
+
 # liteium: A Lightweight Web Scraping and Automation Library
 
 **liteium** is a user-friendly Python library inspired by Selenium, designed to simplify web scraping and automation tasks, especially for beginners. 
