@@ -32,14 +32,16 @@ jobs:
         LATEST_VERSION=$(curl -sS https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json | jq -r '.channels.Stable.version')
         echo "LATEST_VERSION=$LATEST_VERSION" >> $GITHUB_ENV
         echo "::set-output name=LATEST_VERSION::$LATEST_VERSION"
+        echo "Fetched latest ChromeDriver version: $LATEST_VERSION"
 
     - name: Download ChromeDriver
       env:
         LATEST_VERSION: ${{ steps.get_version.outputs.LATEST_VERSION }}
       run: |
+        echo "Downloading ChromeDriver version: $LATEST_VERSION"
         sudo apt-get update
         sudo apt-get install -y wget unzip jq
-        wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${{ env.LATEST_VERSION }}/linux64/chromedriver-linux64.zip
+        wget -N https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${LATEST_VERSION}/linux64/chromedriver-linux64.zip || exit 1
         unzip chromedriver-linux64.zip
         sudo mv -f chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
         sudo chmod +x /usr/local/bin/chromedriver
